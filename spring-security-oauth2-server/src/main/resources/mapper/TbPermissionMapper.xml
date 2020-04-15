@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.spring.security.oauth2.server.mapper.TbPermissionMapper">
+  <resultMap id="BaseResultMap" type="com.hr.spring.security.oauth2.server.domain.TbPermission">
+    <!--@mbg.generated generated on Tue Apr 14 11:10:40 CST 2020.-->
+    <!--@Table tb_permission-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="enname" jdbcType="VARCHAR" property="enname" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Apr 14 11:10:40 CST 2020.-->
+    id, parent_id, `name`, enname, url, description, create_time, update_time
+  </sql>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select tp.* from tb_user tu left join tb_user_role ur on tu.id = ur.user_id
+    left join tb_role tr on ur.role_id = tr.id
+    left join tb_role_permission trp on ur.role_id = trp.role_id
+    left join tb_permission tp on trp.permission_id = tp.id
+    where tu.id = #{userId}
+  </select>
+</mapper>

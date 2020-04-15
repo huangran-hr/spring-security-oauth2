@@ -1,0 +1,8 @@
+通过浏览器获取code，请求地址如下：
+http://localhost:8080/oauth/authorize?client_id=client&response_type=code
+其中client_id的值是数据库表oauth_client_details中的client_id的值
+
+然后再根据code获取token， 可用postman请求，请求如下：
+http://client:secret@localhost:8080/oauth/token?grant_type=authorization_code&code=n7F5yc    post请求，
+其中client是client_id的值，secret对应是oauth_client_details表中client_secret的值,
+grant_type表示授权模式，这里authorization_code是授权码模式，code的值是前面获取的code值
