@@ -14,6 +14,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                //// 以下为配置所需保护的资源路径及权限，需要与认证服务器配置的授权部分对应，也就是tb_permission中的数据
                 .mvcMatchers("/").hasAuthority("root")
                 .mvcMatchers("/system/").hasAuthority("system")
                 .mvcMatchers("/permission/").hasAuthority("permission")
