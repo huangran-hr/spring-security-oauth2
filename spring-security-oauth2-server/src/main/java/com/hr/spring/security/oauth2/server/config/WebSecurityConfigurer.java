@@ -2,6 +2,7 @@ package com.hr.spring.security.oauth2.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,6 +31,19 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
     }
+
+    /**
+     * 需要配置这个支持password模式
+     * support password grant type
+     * @return
+     * @throws Exception
+     */
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

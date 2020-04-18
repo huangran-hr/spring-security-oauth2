@@ -6,6 +6,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -29,6 +30,13 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    /**
+     * 注入authenticationManager
+     * 来支持 password grant type
+     */
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     /**
      * 使用自己配置的数据源
@@ -62,8 +70,24 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        // 配置TokenServices参数 自定义SystemTokenServices 的实现
+//        SystemTokenServices tokenServices = new SystemTokenServices();
+//        tokenServices.setTokenStore(endpoints.getTokenStore());
+//        tokenServices.setSupportRefreshToken(true);
+//        tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
+//        tokenServices.setTokenEnhancer(endpoints.getTokenEnhancer());
+//        tokenServices.setReuseRefreshToken(false);  // 每次刷新token 都会重新生成新的refresh token
+//        tokenServices.setRefreshTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(7)); // 刷新token有效时(天)
+//        tokenServices.setAccessTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(2)); //token有效时间(小时)
+//        tokenServices.setRefreshTokenValiditySeconds((int) TimeUnit.SECONDS.toSeconds(600)); // 刷新token有效时 测试
+//        tokenServices.setAccessTokenValiditySeconds((int) TimeUnit.SECONDS.toSeconds(60)); //token有效时间 测试
+//        endpoints.tokenServices(tokenServices);
         endpoints.tokenStore(tokenStore()); //写入token
+
+        endpoints.authenticationManager(authenticationManager);
     }
+
+
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {

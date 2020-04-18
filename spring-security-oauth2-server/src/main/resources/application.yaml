@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8843
 
 spring:
   application:
@@ -7,9 +7,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     # oauth2 必须是jdbc-url，如果不是oauth2，那就直接用url
-    jdbc-url: jdbc:mysql://192.168.1.43:3306/test?characterEncoding=utf8&userSSL=false
-    username: dev_member
-    password: dev123456
+    jdbc-url: jdbc:mysql://127.0.0.1/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
     hikari:
       minimum-idle: 5
       # 空闲连接存活最大时间，默认600000（10分钟）
