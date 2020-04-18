@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -57,9 +58,14 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 //                .withUser("hr").password(passwordEncoder().encode("123456")).roles("USER");
 
         /*
-        * 基于JDBC
+        * 基于JDBC,使用自定义认证与授权
         * */
         auth.userDetailsService(userDetailsService());
+    }
 
+    @Override
+    public void configure(WebSecurity web)  {
+        // 将 check_token 暴露出去，否则资源服务器访问时报 403 错误
+        web.ignoring().antMatchers("/oauth/check_token");
     }
 }
