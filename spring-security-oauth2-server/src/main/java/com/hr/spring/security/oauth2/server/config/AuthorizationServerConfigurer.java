@@ -85,6 +85,10 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
         endpoints.tokenStore(tokenStore()); //写入token
 
         endpoints.authenticationManager(authenticationManager);
+
+        //在认证服务配置文件AuthorizationServerConfiguration中添加如下配置
+        // 最后一个参数为替换之后授权页面的url
+        endpoints.pathMapping("/oauth/confirm_access","/custom/confirm_access");
     }
 
 

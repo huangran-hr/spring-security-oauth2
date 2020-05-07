@@ -7,9 +7,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     # oauth2 必须是jdbc-url，如果不是oauth2，那就直接用url
-    jdbc-url: jdbc:mysql://127.0.0.1/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: root
+    jdbc-url: jdbc:mysql://192.168.1.43/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: dev_member
+    password: dev123456
     hikari:
       minimum-idle: 5
       # 空闲连接存活最大时间，默认600000（10分钟）
@@ -25,6 +25,11 @@ spring:
       # 数据库连接超时时间,默认30秒，即30000
       connection-timeout: 30000
       connection-test-query: SELECT 1
+  #thymeleaf 配置
+  thymeleaf:
+    prefix: classpath:/templates/views/
+    suffix: .html
+    cache: false
 
 mybatis:
   type-aliases-package: com.hr.spring.security.oauth2.server.domain
