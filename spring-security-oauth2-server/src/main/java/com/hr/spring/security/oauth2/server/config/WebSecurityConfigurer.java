@@ -79,7 +79,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 自定义页面或处理url是，如果不配置全局允许，浏览器会提示服务器将页面转发多次
-                .antMatchers("/auth/login", "/authentication/form","/auth/index")
+                .antMatchers("/auth/login", "/authentication/form")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
