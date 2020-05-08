@@ -1,7 +1,5 @@
 package generator;
 
-import generator.TbPermission;
-import generator.TbPermissionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
