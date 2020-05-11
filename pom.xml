@@ -19,6 +19,11 @@
         <module>spring-security-oauth2-server</module>
         <module>spring-security-oauth2-client</module>
         <module>spring-security-oauth2-resource</module>
+
+        <!-- oauth2-sso 单点登录 -->
+        <module>oauth2-sso-server</module>
+        <module>oauth2-sso-member</module>
+        <module>oauth2-sso-order</module>
     </modules>
 
     <properties>
